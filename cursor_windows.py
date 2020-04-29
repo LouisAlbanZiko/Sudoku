@@ -1,7 +1,9 @@
 from ctypes import CDLL, c_char_p
 import sys
 
-lib = CDLL('./cursor_windows.dll')
+import struct
+platform = struct.calcsize("P") * 8
+lib = CDLL('./cursor_windows/bin/{0}/cursor_windows.dll'.format("Win32" if platform == 32 else "x64"))
 
 xStart = lib.getCursorX()
 yStart = lib.getCursorY()
