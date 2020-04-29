@@ -3,11 +3,16 @@ from textbox import TextBox
 from random import randint
 import sys
 import board
-import cursor
 import time
+import platform
+if platform.system() == "Windows":
+	import cursor_windows as cursor
+else:
+	import cursor
 
 
 help_message = "Commands:\n\
+ \n\
 load <filename>\n\
 gen\n\
 solve\n\
@@ -69,7 +74,6 @@ def solve(sudoku, x, y, display=True, getStart=lambda: 1):
 		return True
 	return False
 
-
 interval = .01
 board.init()
 sudoku = Sudoku()
@@ -84,7 +88,7 @@ help.message(help_message)
 info = TextBox(x=board.width + 2, y=help.y + help.height, width=help.width, height=3)
 
 while 1:
-	cursor.goto(prompt.x - 1, prompt.y + 1)
+	cursor.goto(prompt.x, prompt.y + 1)
 	cursor.writeStringToCursorPos(" " * 20)
 	command = input(">>> ")
 
@@ -163,14 +167,14 @@ clear"
 		board.show(sudoku)
 		info.message("Generating...")
 		solve(sudoku, 0, 0, display=True, getStart=lambda: randint(1, 9))
-		last_removed = [0, 0, 0]
-		while solve(copy(sudoku), 0, 0, display=True):
-			board.show(sudoku)
-			last_removed[0] = randint(0, 8)
-			last_removed[1] = randint(0, 8)
-			last_removed[2] = sudoku.get(last_removed[0], last_removed[1])
-			sudoku.set(last_removed[0], last_removed[1], 0)
-		sudoku.set(last_removed[0], last_removed[1], last_removed[2])
+		#last_removed = [0, 0, 0]
+		#while solve(copy(sudoku), 0, 0, display=True):
+		#	board.show(sudoku)
+		#	last_removed[0] = randint(0, 8)
+		#	last_removed[1] = randint(0, 8)
+		#	last_removed[2] = sudoku.get(last_removed[0], last_removed[1])
+		#	sudoku.set(last_removed[0], last_removed[1], 0)
+		#sudoku.set(last_removed[0], last_removed[1], last_removed[2])
 		info.message("Done")
 		board.show(sudoku)
 	elif args[0] == "solve":

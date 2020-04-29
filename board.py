@@ -1,6 +1,10 @@
 from matrix import Matrix
 import sys
-import cursor
+import platform
+if platform.system() == "Windows":
+	import cursor_windows as cursor
+else:
+	import cursor
 import sudoku
 
 vertical = "\u2551"
@@ -73,12 +77,14 @@ def init():
 	array.set(4 * 9, 2 * 9, cornerBotRight)
 
 	sys.stdout.write(array.toString())
-	cursor.move_left(width - 1)
+	#strings = array.toString().split('\n')
+	#for s in strings:
+	#	cursor.writeStringToCursorPos(s)
+	#	cursor.move_down()
+	
 	cursor.move_up(height - 1)
-
+	cursor.move_down(width - 1)
 	cursor.reset()
-	cursor.move_right()
-	cursor.move_down()
 
 def show(sudoku):
 	goto(0, 0)
@@ -92,8 +98,7 @@ def setValue(x, y, value):
 	cursor.writeToCursorPos(value if value != 0 else ' ')
 
 def goto(x, y):
-	cursor.goto(x * 4 + 1, y * 2 + 1)
+	cursor.goto(x * 4 + 2, y * 2 + 1)
 
 def end():
 	cursor.goto(0, height + 3)
-

@@ -1,4 +1,8 @@
-import cursor
+import platform
+if platform.system() == "Windows":
+	import cursor_windows as cursor
+else:
+	import cursor
 import board
 
 class TextBox:
