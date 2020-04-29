@@ -1,6 +1,7 @@
 # Folders
 .vs/
 __pycache__/
+bin-int/
 
 # Files
 *.sln
