@@ -76,8 +76,6 @@ def solve(sudoku, x, y, display=True, getStart=lambda: 1):
 
 interval = .01
 board.init()
-sudoku = Sudoku()
-board.show(sudoku)
 
 prompt = TextBox(x=0, y=board.height + 1, width=board.width)
 prompt.message("Enter Command:")
@@ -86,6 +84,9 @@ help = TextBox(x=board.width + 2, y=1, width=16, height=board.height)
 help.message(help_message)
 
 info = TextBox(x=board.width + 2, y=help.y + help.height, width=help.width, height=3)
+
+sudoku = Sudoku()
+board.show(sudoku)
 
 while 1:
 	cursor.goto(prompt.x, prompt.y + 1)
