@@ -1,0 +1,7 @@
+# Folders
+.vs/
+__pycache__/
+
+# Files
+*.sln
+*.vcxproj*
