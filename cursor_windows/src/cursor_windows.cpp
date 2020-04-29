@@ -26,7 +26,6 @@ extern "C" {
 
 	__declspec(dllexport)
 		void writeConsole(const char* string, const int length) {
-			char* buffer = new char[length];
 			WriteConsole(GetStdHandle(STD_OUTPUT_HANDLE), string, length, nullptr, NULL);
 		}
 
