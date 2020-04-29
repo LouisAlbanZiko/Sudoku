@@ -83,7 +83,7 @@ def init():
 	#	cursor.move_down()
 	
 	cursor.move_up(height - 1)
-	cursor.move_down(width - 1)
+	cursor.move_left(width - 1)
 	cursor.reset()
 
 def show(sudoku):
