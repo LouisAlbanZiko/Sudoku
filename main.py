@@ -13,6 +13,7 @@ else:
 
 help_message = "Commands:\n\
  \n\
+help\n\
 load <filename>\n\
 gen\n\
 solve\n\
@@ -22,6 +23,7 @@ clear\n\
 exit\n\
 "
 
+# variable which will loop around when it reaches it's max value
 class LoopVariable:
 	def __init__(self, start, end, i=1):
 		self.start = start
@@ -53,24 +55,24 @@ def solve(sudoku, x, y, display=True, getStart=lambda: 1):
 		y += 1
 	if y > 8:
 		return True					# end condition
-	if sudoku.get(x, y) == 0:
+	if sudoku.get(x, y) == 0:	# if cell is empty
 		nr = getStart()
-		i = SudokuLoopVar(nr, randint(1, 2))
+		i = SudokuLoopVar(nr, randint(1, 2)) # loop through all the values
 		while 1:
-			if sudoku.canPut(x, y, i.get()):
-				sudoku.set(x, y, i.get())
+			if sudoku.canPut(x, y, i.get()):	# if value can be put
+				sudoku.set(x, y, i.get())		
 				if display:
 					board.setValue(x, y, i.get())
-				if solve(sudoku, x + 1, y, display):
+				if solve(sudoku, x + 1, y, display, getStart):	# go to next cell
 					return True
 				else:
 					sudoku.set(x, y, 0)
 					if display:
 						board.setValue(x, y, 0)
-			i.increment()
+			i.increment()			# next value
 			if i.get() == nr:
 				break
-	elif solve(sudoku, x + 1, y, display):
+	elif solve(sudoku, x + 1, y, display, getStart):	#if cell is not empty, go to next cell
 		return True
 	return False
 
