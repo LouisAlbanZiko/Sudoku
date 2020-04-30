@@ -7,6 +7,7 @@ else:
 	import cursor
 import sudoku
 
+# special characters for the board
 vertical = "\u2551"
 verticalThin = "\u2502"
 horizontal = "\u2550"
@@ -27,6 +28,7 @@ cornerBotRight = "\u255D"
 width = 4 * 9 + 1
 height = 2 * 9 + 1
 
+# shows the board onto the screen
 def init():
 	array = Matrix(width, height)
 	for x in range(4):
@@ -77,28 +79,28 @@ def init():
 	array.set(4 * 9, 2 * 9, cornerBotRight)
 
 	sys.stdout.write(array.toString())
-	#strings = array.toString().split('\n')
-	#for s in strings:
-	#	cursor.writeStringToCursorPos(s)
-	#	cursor.move_down()
 	
 	cursor.move_up(height - 1)
 	cursor.move_left(width - 1)
 	cursor.reset()
 
+# show a specific sudoku
 def show(sudoku):
 	goto(0, 0)
 	for y in range(9):
 		for x in range(9):
 			setValue(x, y, sudoku.get(x, y))
 	goto(0, 0)
-	
+
+# set value of specific cell in the board
 def setValue(x, y, value):
 	goto(x, y)
 	cursor.writeToCursorPos(value if value != 0 else ' ')
 
+# goto specific cell in the board
 def goto(x, y):
 	cursor.goto(x * 4 + 2, y * 2 + 1)
 
+# goto end of board to stop execution
 def end():
 	cursor.goto(0, height + 3)

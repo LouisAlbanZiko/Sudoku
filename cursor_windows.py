@@ -1,3 +1,5 @@
+# cursor implementation for windows
+
 from ctypes import CDLL, c_char_p
 import sys
 

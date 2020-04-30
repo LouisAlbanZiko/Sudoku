@@ -1,3 +1,5 @@
+# cursor implementation for unix systems
+
 import sys
 
 x = 0

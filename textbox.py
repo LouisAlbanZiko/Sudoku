@@ -5,6 +5,7 @@ else:
 	import cursor
 import board
 
+# Simple textbox for showing messages to the user
 class TextBox:
 	def __init__(self, x, y, width = 10, height = 1):
 		self.x = x
