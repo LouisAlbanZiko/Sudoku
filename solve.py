@@ -1,5 +1,6 @@
 from sudoku import Sudoku, readFromFile
 from textbox import TextBox
+from time import time
 import board
 
 def solve(sudoku, x, y):
@@ -12,7 +13,7 @@ def solve(sudoku, x, y):
 		return solve(sudoku, x + 1, y)	# go to next cell
 	else:
 		for nr in range(1, 10):		# go through all the options
-			if sudoku.canPut(x, y, nr):	# if we nr can be put
+			if sudoku.canPut(x, y, nr):	# if the nr can be put
 				sudoku.set(x, y, nr)	# set value
 				solved = solve(sudoku, x + 1, y)	# go to next cell
 				if solved:		# if solved
@@ -30,10 +31,12 @@ help.message("")
 sudoku = readFromFile('test.sdk')
 board.show(sudoku)
 
+start = time()
 solve(sudoku, 0, 0)
+end = time()
 board.show(sudoku)
 
 board.end()
-
+print("time = {0}".format(end - start))
 
 				
